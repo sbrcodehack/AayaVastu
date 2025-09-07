@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aaya Vastu Calculator</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input { padding: 5px; margin: 5px; width: 100px; }
+    button { padding: 8px 12px; }
+    #result { margin-top: 15px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>🧮 Aaya Vastu Calculator</h2>
+  <label>Length (ft):</label>
+  <input type="number" id="length" value="27"><br>
+  <label>Breadth (ft):</label>
+  <input type="number" id="breadth" value="28"><br>
+  <button onclick="calculateAaya()">Check Aaya</button>
+  <div id="result"></div>
+
+  <script>
+    function calculateAaya() {
+      const L = parseFloat(document.getElementById('length').value);
+      const B = parseFloat(document.getElementById('breadth').value);
+      if (isNaN(L) || isNaN(B)) {
+        document.getElementById('result').innerText = "Please enter valid numbers.";
+        return;
+      }
+
+      const perimeter = 2 * (L + B);
+      const value = perimeter * 8;
+      const remainder = value % 27;
+
+      const goodRemainders = [1, 2, 3, 5, 7];
+      const isAuspicious = goodRemainders.includes(remainder);
+
+      document.getElementById('result').innerHTML =
+        `Perimeter: ${perimeter} ft<br>
+         Value: ${value}<br>
+         Aaya Remainder: ${remainder} → 
+         <span style="color:${isAuspicious ? 'green' : 'red'}">
+         ${isAuspicious ? 'Auspicious ✅' : 'Not Auspicious ❌'}</span>`;
+    }
+  </script>
+</body>
+</html>
